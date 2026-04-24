@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Gear | Ali PS Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #000; color: #fff; }
+        .glass { background: rgba(255,255,255,0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+        .checkout-box { background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%); }
+        .btn-gradient { background: linear-gradient(90deg, #2563eb, #9333ea); transition: all 0.3s; }
+        .btn-gradient:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3); }
+    </style>
+</head>
+<body class="bg-[#050505] min-h-screen">
+
+    <nav class="fixed top-0 w-full z-50 glass py-6 px-10 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-black italic tracking-tighter uppercase">ALI<span class="text-blue-600">PS</span></a>
+        <a href="products.html" class="text-[10px] font-bold uppercase tracking-widest text-gray-400 hover:text-white transition">&larr; Continue Shopping</a>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6 md:px-10 container mx-auto">
+        <div class="mb-12">
+            <h1 class="text-5xl font-black italic tracking-tighter uppercase mb-2">My Basket.</h1>
+            <p id="item-count-text" class="text-gray-500 text-[10px] font-bold uppercase tracking-[0.3em]">0 Items Ready for Action</p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-10">
+            <div id="cart-list" class="flex-1 space-y-4">
+                </div>
+
+            <aside class="w-full lg:w-[400px]">
+                <div class="glass p-8 rounded-[2.5rem] sticky top-32 checkout-box border-blue-600/10">
+                    <h3 class="text-xl font-black italic uppercase mb-8 tracking-tight">Order Summary</h3>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex justify-between text-xs text-gray-400 uppercase font-bold tracking-widest">
+                            <span>Subtotal</span>
+                            <span id="subtotal-text" class="text-white">Rp 0</span>
+                        </div>
+                        <div class="flex justify-between text-xs text-gray-400 uppercase font-bold tracking-widest text-blue-500">
+                            <span>Admin Fee</span>
+                            <span>FREE</span>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 flex justify-between">
+                            <span class="text-xs font-black uppercase tracking-widest">Total Amount</span>
+                            <span id="total-text" class="text-2xl font-black italic text-white text-blue-500">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <a href="checkout.html" id="btn-checkout" class="block w-full btn-gradient text-white text-center py-5 rounded-2xl font-black uppercase text-[10px] tracking-[0.2em]">
+                        Proceed to Checkout
+                    </a>
+                    
+                    <p class="text-[9px] text-center text-gray-600 uppercase tracking-widest mt-6 font-bold">
+                        Secure Transaction Guaranteed
+                    </p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        function renderCart() {
+            const cart = JSON.parse(localStorage.getItem('ali_ps_cart')) || [];
+            const container = document.getElementById('cart-list');
+            const subtotalText = document.getElementById('subtotal-text');
+            const totalText = document.getElementById('total-text');
+            const itemCountText = document.getElementById('item-count-text');
+            const btnCheckout = document.getElementById('btn-checkout');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-20 glass rounded-[3rem]">
+                        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-gray-600 mb-6 italic text-blue-500 underline">Basket is Empty</p>
+                        <a href="products.html" class="text-white text-xs font-bold underline uppercase tracking-widest">Shop Gear Now</a>
+                    </div>
+                `;
+                btnCheckout.style.display = 'none';
+                itemCountText.innerText = '0 Items Ready for Action';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="flex flex-col md:flex-row items-center gap-8 glass p-8 rounded-[2.5rem] transition hover:bg-white/[0.04]">
+                        <div class="w-24 h-24 bg-black rounded-2xl p-2">
+                            <img src="${item.image}" class="w-full h-full object-contain">
+                        </div>
+                        <div class="flex-1 text-center md:text-left">
+                            <h4 class="text-lg font-black uppercase italic tracking-tight">${item.name}</h4>
+                            <p class="text-[10px] text-gray-500 font-bold tracking-widest uppercase">Premium Gear</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-lg font-black italic mb-2">Rp ${item.price.toLocaleString('id-ID')}</p>
+                            <button onclick="removeFromCart(${index})" class="text-[10px] font-bold uppercase tracking-widest text-red-500 hover:underline">Remove</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            subtotalText.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+            totalText.innerText = `Rp ${total.toLocaleString('id-ID')}`;
+            itemCountText.innerText = `${cart.length} Items Ready for Action`;
+        }
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem('ali_ps_cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('ali_ps_cart', JSON.stringify(cart));
+            renderCart();
+            if (typeof updateCartCount === 'function') updateCartCount();
+        }
+
+        window.onload = renderCart;
+    </script>
+</body>
+</html>

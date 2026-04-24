@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order History | Ali PS Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #000; color: #fff; }
+        .glass { background: rgba(255,255,255,0.02); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
+        .status-badge { background: rgba(34, 197, 94, 0.1); color: #22c55e; border: 1px solid rgba(34, 197, 94, 0.2); }
+        .order-card { transition: all 0.4s ease; }
+        .order-card:hover { transform: translateY(-5px); border-color: rgba(37, 99, 235, 0.3); }
+    </style>
+</head>
+<body class="bg-[#050505] min-h-screen">
+
+    <nav class="fixed top-0 w-full z-50 glass py-6 px-10 flex justify-between items-center">
+        <a href="index.html" class="text-2xl font-black italic tracking-tighter uppercase">ALI<span class="text-blue-600">PS</span></a>
+        <div class="flex gap-8 text-[10px] font-black uppercase tracking-widest">
+            <a href="index.html" class="text-gray-500 hover:text-white transition">Home</a>
+            <a href="products.html" class="text-gray-500 hover:text-white transition">Shop More</a>
+        </div>
+    </nav>
+
+    <main class="pt-32 pb-20 px-6 md:px-10 container mx-auto">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-16 text-center md:text-left">
+                <h1 class="text-6xl font-black italic tracking-tighter uppercase mb-4">Orders.</h1>
+                <p class="text-gray-500 text-[10px] font-bold uppercase tracking-[0.4em] italic">Your Premium Gear Journey</p>
+            </div>
+
+            <div id="orders-container" class="space-y-8">
+                </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script>
+        function renderOrders() {
+            const orders = JSON.parse(localStorage.getItem('ali_ps_orders')) || [];
+            const container = document.getElementById('orders-container');
+
+            if (orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-32 glass rounded-[3rem] border-dashed border-white/10">
+                        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-gray-600 mb-6 italic">No Missions Accomplished Yet</p>
+                        <a href="products.html" class="bg-white text-black px-8 py-4 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-600 hover:text-white transition">Start Shopping</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Urutkan dari yang terbaru (reverse)
+            container.innerHTML = orders.reverse().map(order => `
+                <div class="order-card glass p-8 md:p-12 rounded-[3.5rem] border border-white/5 relative overflow-hidden">
+                    <div class="absolute -top-24 -right-24 w-48 h-48 bg-blue-600/5 rounded-full blur-[80px]"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10 pb-10 border-b border-white/5">
+                        <div>
+                            <span class="text-[9px] font-black text-blue-500 uppercase tracking-[0.3em] block mb-2">Transaction ID</span>
+                            <h3 class="text-2xl font-black italic uppercase tracking-tight text-white">#${order.id}</h3>
+                        </div>
+                        <div class="flex flex-col md:items-end">
+                            <span class="status-badge px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest mb-2 italic">
+                                ● ${order.status || 'Success'}
+                            </span>
+                            <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest">${order.date}</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6 mb-10">
+                        <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest italic">Purchased Gear:</p>
+                        ${order.items.map(item => `
+                            <div class="flex justify-between items-center group">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 bg-black rounded-xl p-2 border border-white/5 group-hover:border-blue-500/30 transition">
+                                        <img src="${item.image}" class="w-full h-full object-contain">
+                                    </div>
+                                    <div>
+                                        <h4 class="text-xs font-black uppercase italic text-gray-200">${item.name}</h4>
+                                        <p class="text-[9px] text-gray-600 font-bold uppercase tracking-widest">Original Licensed</p>
+                                    </div>
+                                </div>
+                                <span class="text-xs font-black italic text-white text-blue-500">Rp ${item.price.toLocaleString('id-ID')}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-white/5 gap-6">
+                        <div class="text-center md:text-left">
+                            <p class="text-[9px] font-black text-gray-600 uppercase tracking-[0.2em] mb-1">Shipping To:</p>
+                            <p class="text-[10px] font-bold text-white uppercase tracking-widest">${order.name}</p>
+                        </div>
+                        <div class="text-center md:text-right">
+                            <p class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] mb-1">Grand Total</p>
+                            <h4 class="text-3xl font-black italic text-white tracking-tighter">Rp ${order.total.toLocaleString('id-ID')}</h4>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.onload = renderOrders;
+    </script>
+</body>
+</html>
