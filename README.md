@@ -24,4 +24,4 @@
 3. Pastikan koneksi internet tersedia untuk memuat Tailwind CSS.
 
 ### Link Demo
-[\[Taro Link GitHub Pages kamu di sini\]](https://github.com/ETRIDI267/Muhamad_Saifullah_Ali_UTS_Web2)
+ https://etridi267.github.io/Muhamad_Saifullah_Ali_UTS_Web2/
