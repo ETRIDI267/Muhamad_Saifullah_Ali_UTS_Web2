@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "name": "PlayStation 5 Slim",
+    "price": 8990000,
+    "image": "https://gmedia.playstation.com/is/image/SIEPDC/ps5-product-thumbnail-01-en-14sep21",
+    "description": "Powerful gaming in a sleek, compact design."
+  },
+  {
+    "id": 2,
+    "name": "DualSense Edge Controller",
+    "price": 3599000,
+    "image": "https://gmedia.playstation.com/is/image/SIEPDC/dualsense-edge-key-art-01-en-23aug22",
+    "description": "High-performance wireless controller with customizable controls."
+  },
+  {
+    "id": 3,
+    "name": "Pulse Elite Wireless Headset",
+    "price": 2290000,
+    "image": "https://gmedia.playstation.com/is/image/SIEPDC/pulse-elite-headset-image-block-01-en-14dec23",
+    "description": "Planar magnetic drivers for studio-quality audio."
+  }
+]
