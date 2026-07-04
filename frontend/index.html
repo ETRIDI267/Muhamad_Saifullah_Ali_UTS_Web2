@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraCart - Premium E-Commerce Website</title>
+  <meta name="description" content="AuraCart menghadirkan berbagai produk pilihan dengan kualitas premium dan desain minimalis modern. Dapatkan penawaran terbaik hari ini!">
+  <link rel="stylesheet" href="style.css">
+  <!-- FontAwesome for Premium Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- --- HEADER & NAVIGATION --- -->
+  <header>
+    <div class="container header-container">
+      <a href="#" class="logo" id="nav-logo">
+        <i class="fa-solid fa-bag-shopping"></i> AuraCart
+      </a>
+      
+      <nav id="main-nav">
+        <a href="#" class="nav-link active" data-view="home" id="nav-home">Beranda</a>
+        <a href="#" class="nav-link" data-view="shop" id="nav-shop">Toko</a>
+        <a href="#" class="nav-link" data-view="account" id="nav-account">Akun Saya</a>
+        <a href="#" class="nav-link" data-view="admin" id="nav-admin">Admin Panel</a>
+      </nav>
+      
+      <div class="header-actions">
+        <!-- Theme Toggle -->
+        <button class="icon-btn theme-toggle" id="theme-toggle-btn" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        
+        <!-- Wishlist Toggle (Opens Account Page -> Wishlist Tab) -->
+        <button class="icon-btn" id="wishlist-btn-header" aria-label="Wishlist">
+          <i class="fa-solid fa-heart"></i>
+          <span class="badge" id="wishlist-badge">0</span>
+        </button>
+        
+        <!-- Cart Toggle -->
+        <button class="icon-btn" id="cart-toggle-btn" aria-label="Shopping Cart">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="badge" id="cart-badge">0</span>
+        </button>
+
+        <!-- Logout Button -->
+        <button class="icon-btn" id="logout-btn" aria-label="Keluar" style="display: none;">
+          <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- --- MAIN SPA CONTENT VIEWS --- -->
+  <main>
+    
+    <!-- 0. LOGIN VIEW -->
+    <section id="view-login" class="view-section">
+      <div class="container" style="display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 160px);">
+        <div class="checkout-card" style="width: 100%; max-width: 400px; margin: 0 auto; text-align: center; backdrop-filter: blur(12px); border-radius: var(--radius-xl); box-shadow: var(--shadow-xl);">
+          <div class="logo" style="justify-content: center; font-size: 32px; margin-bottom: 8px;">
+            <i class="fa-solid fa-user-gear" style="color: var(--primary);"></i> AuraCart Admin
+          </div>
+          <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 24px;">Silakan masuk ke panel kontrol administrator.</p>
+          
+          <form id="admin-login-form" onsubmit="event.preventDefault();" style="text-align: left; display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+            <div class="form-group">
+              <label for="admin-email">Email Admin</label>
+              <input type="email" id="admin-email" value="admin@auracart.com" required>
+            </div>
+            <div class="form-group">
+              <label for="admin-password">Kata Sandi</label>
+              <input type="password" id="admin-password" value="123456" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 12px;" id="admin-login-submit-btn">
+              Masuk Panel Admin <i class="fa-solid fa-right-to-bracket"></i>
+            </button>
+          </form>
+          
+          <div style="font-size: 11px; color: var(--text-muted);">
+            Kredensial simulasi telah diisi sebelumnya. Klik tombol untuk masuk.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1. HOME VIEW -->
+    <section id="view-home" class="view-section active">
+      <div class="container">
+        <!-- Hero Banner -->
+        <div class="hero">
+          <div class="hero-grid">
+            <div class="hero-content">
+              <span class="hero-tag">
+                <i class="fa-solid fa-sparkles"></i> Koleksi Baru 2026
+              </span>
+              <h1 class="hero-title">Gaya Hidup Estetis Dimulai Di Sini</h1>
+              <p class="hero-desc">Temukan kurasi produk teknologi, fashion, dan perlengkapan rumah minimalis terpilih dengan kualitas premium.</p>
+              <div class="hero-buttons">
+                <button class="btn btn-primary" id="hero-shop-btn">Belanja Sekarang <i class="fa-solid fa-arrow-right"></i></button>
+                <button class="btn btn-secondary" id="hero-learn-btn">Pelajari Lebih Lanjut</button>
+              </div>
+            </div>
+            <div class="hero-image-container">
+              <div class="hero-glow"></div>
+              <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800&auto=format&fit=crop&q=80" alt="Premium Shopping" class="hero-img">
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust Features -->
+        <div class="features">
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <div>
+              <h3 class="feature-title">Gratis Ongkir</h3>
+              <p class="feature-desc">Pengiriman gratis untuk seluruh wilayah pulau Jawa.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div>
+              <h3 class="feature-title">Pembayaran Aman</h3>
+              <p class="feature-desc">Enkripsi data pembayaran 256-bit kelas perbankan.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-rotate-left"></i></div>
+            <div>
+              <h3 class="feature-title">Garansi 30 Hari</h3>
+              <p class="feature-desc">Pengembalian uang penuh jika produk bermasalah.</p>
+            </div>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+            <div>
+              <h3 class="feature-title">Dukungan 24/7</h3>
+              <p class="feature-desc">Layanan pelanggan cepat siap sedia kapan saja.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Featured Products Header -->
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Produk Pilihan Terbaik</h2>
+            <p>Koleksi produk yang paling dicintai oleh pelanggan kami</p>
+          </div>
+          <button class="btn btn-secondary" id="home-view-all-btn">Lihat Semua</button>
+        </div>
+
+        <!-- Featured Products Catalog Grid -->
+        <div class="product-grid" id="featured-products-grid">
+          <!-- Dynamically inserted product cards -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SHOP CATALOG VIEW -->
+    <section id="view-shop" class="view-section">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-title-wrap">
+            <h2>Katalog Produk</h2>
+            <p>Cari dan temukan barang impian Anda dengan filter pencarian</p>
+          </div>
+        </div>
+
+        <div class="shop-layout">
+          <!-- Sidebar Filters -->
+          <aside class="sidebar-filters">
+            <!-- Search Inside Shop (Alternate Mobile Layout) -->
+            <div class="filter-group">
+              <h3 class="filter-title">Kategori</h3>
+              <ul class="category-list" id="category-filter-list">
+                <li class="category-item active" data-category="all">Semua Produk <span id="count-all">(0)</span></li>
+                <li class="category-item" data-category="Tech">Tech <span id="count-Tech">(0)</span></li>
+                <li class="category-item" data-category="Fashion">Fashion <span id="count-Fashion">(0)</span></li>
+                <li class="category-item" data-category="Home & Living">Home & Living <span id="count-Home">(0)</span></li>
+                <li class="category-item" data-category="Lifestyle">Lifestyle <span id="count-Lifestyle">(0)</span></li>
+              </ul>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Rentang Harga</h3>
+              <div class="price-inputs">
+                <input type="range" class="price-range-slider" id="price-slider" min="0" max="5000000" step="50000" value="5000000">
+                <div class="price-range-label">
+                  Maksimal: <span id="price-slider-label">Rp 5.000.000</span>
+                </div>
+                <div class="price-number-inputs">
+                  <div class="price-input-wrap">
+                    <span>Rp</span>
+                    <input type="number" id="price-min" placeholder="Min" value="0">
+                  </div>
+                  <div class="price-input-wrap">
+                    <span>Rp</span>
+                    <input type="number" id="price-max" placeholder="Max" value="5000000">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Rating Minimal</h3>
+              <div class="rating-filter">
+                <label class="rating-option">
+                  <input type="radio" name="rating-filter" value="0" checked>
+                  Semua Rating
+                </label>
+                <label class="rating-option">
+                  <input type="radio" name="rating-filter" value="4.5">
+                  <span class="rating-stars-color"><i class="fa-solid fa-star"></i> 4.5+</span>
+                </label>
+                <label class="rating-option">
+                  <input type="radio" name="rating-filter" value="4.8">
+                  <span class="rating-stars-color"><i class="fa-solid fa-star"></i> 4.8+</span>
+                </label>
+              </div>
+            </div>
+            
+            <button class="btn btn-secondary" style="width: 100%; margin-top: 8px;" id="reset-filters-btn">
+              <i class="fa-solid fa-arrow-rotate-left"></i> Atur Ulang Filter
+            </button>
+          </aside>
+
+          <!-- Catalog Main Area -->
+          <div class="catalog-main">
+            <!-- Catalog Toolbar -->
+            <div class="catalog-toolbar">
+              <div class="search-bar">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="catalog-search" placeholder="Cari nama produk...">
+              </div>
+              <div>
+                <select class="sort-select" id="catalog-sort">
+                  <option value="popular">Terpopuler</option>
+                  <option value="price-asc">Harga: Rendah ke Tinggi</option>
+                  <option value="price-desc">Harga: Tinggi ke Rendah</option>
+                  <option value="rating-desc">Rating Tertinggi</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Product Cards Container -->
+            <div class="product-grid" id="catalog-products-grid">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CHECKOUT VIEW -->
+    <section id="view-checkout" class="view-section">
+      <div class="container">
+        <h2 class="section-title-wrap" style="margin-bottom: 32px;">Penyelesaian Pesanan (Checkout)</h2>
+        
+        <div class="checkout-grid">
+          
+          <!-- Left: Checkout Forms & Steps -->
+          <div class="checkout-main-content">
+            <!-- Steps Progress Indicator -->
+            <div class="checkout-steps">
+              <div class="checkout-step-progress" id="checkout-progress-line"></div>
+              <div class="step-node active" id="step-node-1">
+                <div class="step-circle">1</div>
+                <span class="step-label">Alamat</span>
+              </div>
+              <div class="step-node" id="step-node-2">
+                <div class="step-circle">2</div>
+                <span class="step-label">Pembayaran</span>
+              </div>
+              <div class="step-node" id="step-node-3">
+                <div class="step-circle">3</div>
+                <span class="step-label">Selesai</span>
+              </div>
+            </div>
+
+            <!-- STEP 1: SHIPPING ADDRESS FORM -->
+            <div class="checkout-card" id="checkout-step-1-form">
+              <h3><i class="fa-solid fa-location-dot"></i> Informasi Pengiriman</h3>
+              <form id="shipping-form" onsubmit="event.preventDefault();">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="ship-name">Nama Penerima *</label>
+                    <input type="text" id="ship-name" required value="Muhammad Saif">
+                  </div>
+                  <div class="form-group">
+                    <label for="ship-phone">Nomor Telepon *</label>
+                    <input type="tel" id="ship-phone" required value="081234567890">
+                  </div>
+                  <div class="form-group form-col-full">
+                    <label for="ship-address">Alamat Lengkap *</label>
+                    <textarea id="ship-address" rows="3" required>Jl. Merdeka No. 45, Kecamatan Gambir</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="ship-city">Kota *</label>
+                    <input type="text" id="ship-city" required value="Jakarta Pusat">
+                  </div>
+                  <div class="form-group">
+                    <label for="ship-zip">Kode Pos *</label>
+                    <input type="text" id="ship-zip" required value="10110">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 24px; float: right;" id="to-payment-btn">
+                  Lanjut ke Pembayaran <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div style="clear: both;"></div>
+              </form>
+            </div>
+
+            <!-- STEP 2: PAYMENT FORM -->
+            <div class="checkout-card" id="checkout-step-2-form" style="display: none;">
+              <h3><i class="fa-solid fa-credit-card"></i> Metode Pembayaran</h3>
+              
+              <div class="payment-methods">
+                <label class="payment-option active" data-method="card">
+                  <input type="radio" name="payment-method-select" checked>
+                  <div class="payment-icon"><i class="fa-solid fa-credit-card"></i></div>
+                  <div class="payment-details-label">Kartu Kredit / Debit</div>
+                </label>
+                <label class="payment-option" data-method="ewallet">
+                  <input type="radio" name="payment-method-select">
+                  <div class="payment-icon"><i class="fa-solid fa-wallet"></i></div>
+                  <div class="payment-details-label">Simulasi E-Wallet (GoPay/OVO)</div>
+                </label>
+              </div>
+
+              <!-- Card Payment Inputs & Interactive Graphic -->
+              <div id="card-payment-details">
+                <div class="card-mockup-wrapper">
+                  <div class="card-mockup">
+                    <div class="card-chip"></div>
+                    <div class="card-number" id="mock-card-number">•••• •••• •••• ••••</div>
+                    <div class="card-info-row">
+                      <div class="card-holder">
+                        <span class="card-info-label">Card Holder</span>
+                        <span class="card-info-val" id="mock-card-name">NAMA LENGKAP</span>
+                      </div>
+                      <div class="card-expiry">
+                        <span class="card-info-label">Expires</span>
+                        <span class="card-info-val" id="mock-card-expiry">MM/YY</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <form id="payment-card-form" onsubmit="event.preventDefault();">
+                  <div class="form-grid">
+                    <div class="form-group form-col-full">
+                      <label for="card-num-input">Nomor Kartu *</label>
+                      <input type="text" id="card-num-input" placeholder="4111 2222 3333 4444" maxlength="19" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="card-name-input">Nama di Kartu *</label>
+                      <input type="text" id="card-name-input" placeholder="Muhammad Saif" required>
+                    </div>
+                    <div class="form-group">
+                      <div class="form-grid" style="gap: 12px; margin-top: 0;">
+                        <div class="form-group">
+                          <label for="card-exp-input">Masa Berlaku *</label>
+                          <input type="text" id="card-exp-input" placeholder="12/28" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="card-cvv-input">CVV *</label>
+                          <input type="password" id="card-cvv-input" placeholder="123" maxlength="3" required>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+              <div id="ewallet-payment-details" style="display: none;">
+                <div class="feature-card" style="margin-bottom: 24px; background-color: var(--bg-tertiary);">
+                  <div class="feature-icon"><i class="fa-solid fa-qrcode"></i></div>
+                  <div>
+                    <h3 class="feature-title">Bayar via QRIS / E-Wallet</h3>
+                    <p class="feature-desc">Pindai kode QRIS pada dashboard setelah pemesanan dikonfirmasi. Bayar instan menggunakan saldo gopay/ovo.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-top: 32px;">
+                <button class="btn btn-secondary" id="back-to-shipping-btn">
+                  <i class="fa-solid fa-arrow-left"></i> Kembali ke Alamat
+                </button>
+                <button class="btn btn-primary" id="complete-order-btn">
+                  Konfirmasi & Bayar <i class="fa-solid fa-circle-check"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3: SUCCESS VIEW & INVOICE -->
+            <div class="success-card" id="checkout-step-3-success" style="display: none;">
+              <div class="success-icon">
+                <i class="fa-solid fa-check"></i>
+              </div>
+              <h2 class="success-title">Pembayaran Berhasil!</h2>
+              <p class="success-desc">Terima kasih atas pesanan Anda. Kami telah menerima pembayaran dan akan segera memproses pengiriman produk Anda.</p>
+              
+              <!-- Printable/Viewable Invoice -->
+              <div class="invoice" id="invoice-details-box">
+                <!-- Dynamically populated with invoice items -->
+              </div>
+
+              <div style="display: flex; gap: 16px; justify-content: center;">
+                <button class="btn btn-primary" id="success-home-btn">Kembali ke Beranda</button>
+                <button class="btn btn-secondary" id="success-orders-btn">Lihat Riwayat Pesanan</button>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right: Order Summary Panel -->
+          <aside class="summary-panel" id="checkout-summary-panel">
+            <h3 class="summary-title">Ringkasan Pesanan</h3>
+            
+            <div class="summary-items" id="checkout-summary-items">
+              <!-- Dynamically populated from cart state -->
+            </div>
+
+            <div class="summary-totals">
+              <div class="cart-summary-row">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal">Rp 0</span>
+              </div>
+              <div class="cart-summary-row">
+                <span>Pengiriman</span>
+                <span id="checkout-shipping">Rp 0 (Gratis)</span>
+              </div>
+              <div class="cart-summary-row" id="checkout-discount-row" style="display: none; color: var(--accent);">
+                <span>Diskon Kode Promo</span>
+                <span id="checkout-discount-amount">-Rp 0</span>
+              </div>
+              <div class="cart-summary-total">
+                <span>Total Bayar</span>
+                <span id="checkout-total">Rp 0</span>
+              </div>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ACCOUNT & DASHBOARD VIEW -->
+    <section id="view-account" class="view-section">
+      <div class="container">
+        <h2 class="section-title-wrap" style="margin-bottom: 32px;">Dashboard Pengguna</h2>
+        
+        <div class="dashboard-grid">
+          <!-- Sidebar Tab Switches -->
+          <aside class="dashboard-sidebar">
+            <button class="db-tab-btn active" data-db-tab="profile">
+              <i class="fa-solid fa-user"></i> Profil Saya
+            </button>
+            <button class="db-tab-btn" data-db-tab="orders">
+              <i class="fa-solid fa-receipt"></i> Riwayat Pesanan
+            </button>
+            <button class="db-tab-btn" data-db-tab="wishlist">
+              <i class="fa-solid fa-heart"></i> Daftar Keinginan
+            </button>
+          </aside>
+
+          <!-- Main Tab Content Area -->
+          <div class="db-content-card">
+            
+            <!-- Tab: Profile Details -->
+            <div class="db-section active" id="db-sec-profile">
+              <div class="profile-card">
+                <div class="profile-avatar">MS</div>
+                <div>
+                  <h3 style="font-size: 20px;">Muhammad Saif</h3>
+                  <p style="color: var(--text-secondary); font-size: 14px;">msaif@gmail.com</p>
+                </div>
+              </div>
+
+              <h4 style="margin-bottom: 16px;">Detail Alamat Default</h4>
+              <div class="feature-card" style="background-color: var(--bg-primary);">
+                <div class="feature-icon"><i class="fa-solid fa-location-dot"></i></div>
+                <div>
+                  <p class="feature-title">Muhammad Saif (+6281234567890)</p>
+                  <p class="feature-desc">Jl. Merdeka No. 45, Kecamatan Gambir, Kota Jakarta Pusat, DKI Jakarta - 10110</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab: Orders History -->
+            <div class="db-section" id="db-sec-orders">
+              <h3 style="margin-bottom: 20px;">Riwayat Pemesanan Anda</h3>
+              <div style="overflow-x: auto;">
+                <table class="orders-table">
+                  <thead>
+                    <tr>
+                      <th>ID Pesanan</th>
+                      <th>Tanggal</th>
+                      <th>Total Transaksi</th>
+                      <th>Status Pembayaran</th>
+                      <th>Status Pengiriman</th>
+                    </tr>
+                  </thead>
+                  <tbody id="orders-history-table-body">
+                    <!-- Loaded dynamically from localStorage -->
+                    <tr>
+                      <td colspan="5" style="text-align: center; color: var(--text-muted);">Belum ada riwayat pemesanan.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Tab: Wishlist Favorites -->
+            <div class="db-section" id="db-sec-wishlist">
+              <h3 style="margin-bottom: 20px;">Daftar Keinginan Saya</h3>
+              <div class="product-grid" id="wishlist-products-grid">
+                <!-- Dynamically populated from wishlist state -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ADMIN / MERCHANT DASHBOARD VIEW -->
+    <section id="view-admin" class="view-section">
+      <div class="container">
+        <h2 class="section-title-wrap" style="margin-bottom: 32px;">Panel Kontrol Admin/Merchant</h2>
+        
+        <!-- Stats Cards Row -->
+        <div class="admin-stats">
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-money-bill-trend-up"></i></div>
+            <div>
+              <div class="stat-val" id="admin-revenue">Rp 12.350.000</div>
+              <div class="stat-label">Pendapatan Total</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon green"><i class="fa-solid fa-bag-shopping"></i></div>
+            <div>
+              <div class="stat-val" id="admin-orders-count">4</div>
+              <div class="stat-label">Total Pesanan Masuk</div>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <div>
+              <div class="stat-val" id="admin-products-count">8</div>
+              <div class="stat-label">Jenis Produk Dijual</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab Navigation -->
+        <div class="admin-tabs" style="display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap;">
+          <button class="btn btn-primary admin-tab-btn active" data-admin-tab="products" id="admin-tab-products">
+            <i class="fa-solid fa-boxes-stacked"></i> Kelola Produk
+          </button>
+          <button class="btn btn-secondary admin-tab-btn" data-admin-tab="orders" id="admin-tab-orders">
+            <i class="fa-solid fa-receipt"></i> Kelola Pesanan
+          </button>
+          <button class="btn btn-secondary admin-tab-btn" data-admin-tab="add-product" id="admin-tab-add">
+            <i class="fa-solid fa-plus-circle"></i> Tambah Produk
+          </button>
+        </div>
+
+        <!-- Admin Tab: Product Management Table -->
+        <div class="admin-section active" id="admin-sec-products">
+          <div class="checkout-card" style="overflow: visible;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+              <h3><i class="fa-solid fa-cubes"></i> Daftar Inventaris Produk</h3>
+              <div class="search-bar" style="max-width: 300px;">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="admin-product-search" placeholder="Cari produk...">
+              </div>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="orders-table" id="admin-products-table">
+                <thead>
+                  <tr>
+                    <th>Gambar</th>
+                    <th>Nama Produk</th>
+                    <th>Kategori</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Rating</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-products-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab: Order Management Table -->
+        <div class="admin-section" id="admin-sec-orders">
+          <div class="checkout-card" style="overflow: visible;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+              <h3><i class="fa-solid fa-clipboard-list"></i> Daftar Pesanan Masuk</h3>
+            </div>
+            <div style="overflow-x: auto;">
+              <table class="orders-table" id="admin-orders-table">
+                <thead>
+                  <tr>
+                    <th>ID Pesanan</th>
+                    <th>Tanggal</th>
+                    <th>Jumlah Item</th>
+                    <th>Total</th>
+                    <th>Pembayaran</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-orders-table-body">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Admin Tab: Add Product (moved here) -->
+        <div class="admin-section" id="admin-sec-add-product">
+          <div class="checkout-grid">
+            <!-- Left: Add New Product Form -->
+            <div class="checkout-card">
+              <h3><i class="fa-solid fa-plus-circle"></i> Tambah Produk Baru</h3>
+              <form id="add-product-form" onsubmit="event.preventDefault();">
+                <div class="form-grid">
+                  <div class="form-group">
+                    <label for="prod-name">Nama Produk *</label>
+                    <input type="text" id="prod-name" placeholder="AuraMouse Pro" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="prod-category">Kategori *</label>
+                    <select id="prod-category" required>
+                      <option value="Tech">Tech</option>
+                      <option value="Fashion">Fashion</option>
+                      <option value="Home &amp; Living">Home &amp; Living</option>
+                      <option value="Lifestyle">Lifestyle</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="prod-price">Harga (Rupiah) *</label>
+                    <input type="number" id="prod-price" placeholder="450000" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="prod-stock">Stok Awal *</label>
+                    <input type="number" id="prod-stock" placeholder="20" required>
+                  </div>
+                  <div class="form-group form-col-full">
+                    <label for="prod-desc">Deskripsi Singkat *</label>
+                    <textarea id="prod-desc" rows="3" placeholder="Tuliskan deskripsi kelebihan produk..." required></textarea>
+                  </div>
+                  <div class="form-group form-col-full">
+                    <label for="prod-img">Link Gambar Unsplash (atau biarkan default) *</label>
+                    <input type="url" id="prod-img" value="https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?w=800&auto=format&fit=crop&q=80">
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="margin-top: 24px; width: 100%;">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Pasangkan Produk di Toko
+                </button>
+              </form>
+            </div>
+
+            <!-- Right: Mini Charts / Stats Graphic -->
+            <div class="summary-panel">
+              <h3 class="chart-title"><i class="fa-solid fa-chart-simple"></i> Tren Penjualan Mingguan</h3>
+              
+              <div class="bar-chart">
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 35%;"></div>
+                  <span class="chart-day">Sen</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 50%;"></div>
+                  <span class="chart-day">Sel</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 45%;"></div>
+                  <span class="chart-day">Rab</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 70%;"></div>
+                  <span class="chart-day">Kam</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 90%;"></div>
+                  <span class="chart-day">Jum</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 60%;"></div>
+                  <span class="chart-day">Sab</span>
+                </div>
+                <div class="chart-column">
+                  <div class="chart-bar" style="height: 80%;"></div>
+                  <span class="chart-day">Min</span>
+                </div>
+              </div>
+              
+              <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-color); font-size: 13px;">
+                <p style="color: var(--text-secondary);">Simulasi Grafik Penjualan ini merepresentasikan aktivitas transaksi per hari.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Edit Product Modal -->
+    <div class="modal-overlay" id="edit-product-modal">
+      <div class="modal-content" style="max-width: 550px; display: block;">
+        <button class="close-btn modal-close" id="edit-modal-close-btn" aria-label="Close Modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <h2 style="margin-bottom: 24px; font-size: 20px;"><i class="fa-solid fa-pen-to-square" style="color: var(--primary);"></i> Edit Produk</h2>
+        <form id="edit-product-form" onsubmit="event.preventDefault();">
+          <input type="hidden" id="edit-prod-id">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="edit-prod-name">Nama Produk *</label>
+              <input type="text" id="edit-prod-name" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-prod-category">Kategori *</label>
+              <select id="edit-prod-category" required>
+                <option value="Tech">Tech</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Home &amp; Living">Home &amp; Living</option>
+                <option value="Lifestyle">Lifestyle</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="edit-prod-price">Harga (Rupiah) *</label>
+              <input type="number" id="edit-prod-price" required>
+            </div>
+            <div class="form-group">
+              <label for="edit-prod-stock">Stok *</label>
+              <input type="number" id="edit-prod-stock" required>
+            </div>
+            <div class="form-group form-col-full">
+              <label for="edit-prod-desc">Deskripsi *</label>
+              <textarea id="edit-prod-desc" rows="3" required></textarea>
+            </div>
+            <div class="form-group form-col-full">
+              <label for="edit-prod-img">Link Gambar</label>
+              <input type="url" id="edit-prod-img">
+            </div>
+          </div>
+          <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 24px;">
+            <button type="button" class="btn btn-secondary" id="edit-cancel-btn">Batal</button>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="delete-confirm-modal">
+      <div class="modal-content" style="max-width: 420px; display: block; text-align: center;">
+        <div style="font-size: 48px; color: var(--danger); margin-bottom: 16px;">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2 style="margin-bottom: 8px; font-size: 20px;">Hapus Produk?</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 14px;" id="delete-confirm-text">Apakah Anda yakin ingin menghapus produk ini? Tindakan ini tidak dapat dibatalkan.</p>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button class="btn btn-secondary" id="delete-cancel-btn">Batal</button>
+          <button class="btn btn-primary" style="background: var(--danger); border-color: var(--danger);" id="delete-confirm-btn">
+            <i class="fa-solid fa-trash"></i> Ya, Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- --- SLIDE-OVER SHOPPING CART PANEL --- -->
+  <div class="cart-overlay" id="cart-overlay-element">
+    <div class="cart-panel">
+      <div class="cart-header">
+        <h2 class="cart-title"><i class="fa-solid fa-cart-shopping"></i> Keranjang Anda</h2>
+        <button class="close-btn" id="cart-close-btn" aria-label="Close Cart">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Items Scroll -->
+      <div class="cart-items-container" id="cart-items-wrapper">
+        <!-- Dynamically loaded -->
+      </div>
+
+      <!-- Summary & Action Footer -->
+      <div class="cart-footer">
+        <div class="promo-container">
+          <input type="text" class="promo-input" id="cart-promo-code" placeholder="Punya kode promo? (ANTIGRAVITY / DISKON10)">
+          <button class="promo-btn" id="cart-apply-promo">Pakai</button>
+        </div>
+        
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">Rp 0</span>
+        </div>
+        <div class="cart-summary-row" id="cart-discount-row" style="display: none; color: var(--accent);">
+          <span>Diskon</span>
+          <span id="cart-discount-val">-Rp 0</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Ongkos Kirim</span>
+          <span style="color: var(--accent); font-weight: 600;">Gratis</span>
+        </div>
+        
+        <div class="cart-summary-total">
+          <span>Total Estimasi</span>
+          <span id="cart-total">Rp 0</span>
+        </div>
+
+        <button class="btn btn-primary cart-checkout-btn" id="cart-checkout-btn-action">
+          Selesaikan Pembayaran <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- --- INTERACTIVE PRODUCT DETAILS MODAL --- -->
+  <div class="modal-overlay" id="product-details-modal">
+    <div class="modal-content">
+      <button class="close-btn modal-close" id="modal-close-btn" aria-label="Close Modal">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <!-- Gallery Column -->
+      <div class="modal-gallery">
+        <div class="main-image-wrap">
+          <img src="" id="modal-main-img" alt="Main Image">
+        </div>
+        <div class="thumbnail-list" id="modal-thumbnails">
+          <!-- Thumbnails loaded dynamically -->
+        </div>
+      </div>
+
+      <!-- Details Info Column -->
+      <div class="modal-details">
+        <span class="modal-category" id="modal-category">Tech</span>
+        <h2 class="modal-title" id="modal-title">Product Title</h2>
+        
+        <div class="modal-rating-price">
+          <div class="product-card-rating">
+            <span class="rating-stars" id="modal-stars">
+              <!-- filled by JS -->
+            </span>
+            <span class="rating-count" id="modal-review-count">(12 ulasan)</span>
+          </div>
+          <span class="modal-price" id="modal-price">Rp 0</span>
+        </div>
+
+        <p class="modal-desc" id="modal-desc">
+          Deskripsi detail produk akan dimasukkan di sini secara dinamis berdasarkan data JSON produk yang dipilih.
+        </p>
+
+        <!-- Variants Option Selector -->
+        <div class="variant-selectors" id="modal-variants-container">
+          <!-- Dynamically inserted pill groups (e.g. Size, Color) -->
+        </div>
+
+        <!-- Purchase Buttons -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary" id="modal-add-wishlist">
+            <i class="fa-regular fa-heart"></i> Tambah Wishlist
+          </button>
+          <button class="btn btn-primary" id="modal-add-cart">
+            <i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang
+          </button>
+        </div>
+      </div>
+
+      <!-- Specs & Reviews Tabs -->
+      <div class="modal-tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="specs" id="tab-btn-specs">Spesifikasi</button>
+          <button class="tab-btn" data-tab="reviews" id="tab-btn-reviews">Ulasan Pelanggan</button>
+        </div>
+        
+        <!-- Specs Tab Panel -->
+        <div class="tab-panel active" id="tab-panel-specs">
+          <table class="spec-table" id="modal-specs-table">
+            <!-- Dynamically populated spec rows -->
+          </table>
+        </div>
+
+        <!-- Reviews Tab Panel -->
+        <div class="tab-panel" id="tab-panel-reviews">
+          <div class="review-list" id="modal-reviews-list">
+            <!-- Dynamically populated customer review entries -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- --- TOAST NOTIFICATIONS CONTAINER --- -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- --- FOOTER --- -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-logo-col">
+          <a href="#" class="logo" style="margin-bottom: 16px;">
+            <i class="fa-solid fa-bag-shopping"></i> AuraCart
+          </a>
+          <p class="footer-desc">Premium Minimalist E-Commerce. Menyediakan kurasi produk terbaik untuk mempercantik kehidupan Anda yang rapi dan terorganisir.</p>
+        </div>
+        <div>
+          <h4 class="footer-title">Kategori Toko</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link" data-category-link="Tech">Teknologi</a></li>
+            <li><a href="#" class="footer-link" data-category-link="Fashion">Mode Busana</a></li>
+            <li><a href="#" class="footer-link" data-category-link="Home & Living">Perlengkapan Rumah</a></li>
+            <li><a href="#" class="footer-link" data-category-link="Lifestyle">Gaya Hidup</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-title">Dukungan</h4>
+          <ul class="footer-links">
+            <li><a href="#" class="footer-link">Bantuan Pelanggan</a></li>
+            <li><a href="#" class="footer-link">Kebijakan Garansi</a></li>
+            <li><a href="#" class="footer-link">Pelacakan Paket</a></li>
+            <li><a href="#" class="footer-link">Syarat & Ketentuan</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 AuraCart Corporation. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p>Dibuat dengan <i class="fa-solid fa-heart" style="color: var(--danger);"></i> untuk Gaya Hidup Modern.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- --- APP JAVASCRIPT LOADING --- -->
+  <script src="products.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

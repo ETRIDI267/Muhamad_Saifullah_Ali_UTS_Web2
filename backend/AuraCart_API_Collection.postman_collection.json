@@ -1,0 +1,267 @@
+{
+  "info": {
+    "_postman_id": "auracart-backend-api-v1",
+    "name": "AuraCart Backend API - UAS",
+    "description": "Koleksi API untuk proyek UAS E-Commerce AuraCart. Mencakup CRUD Produk, Checkout (notif WA), dan manajemen Pesanan.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "🔐 Auth",
+      "item": [
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/auth/login", "host": ["{{BASE_URL}}"], "path": ["api","auth","login"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@auracart.com\",\n  \"password\": \"123456\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/auth/logout", "host": ["{{BASE_URL}}"], "path": ["api","auth","logout"]}
+          }
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/auth/me", "host": ["{{BASE_URL}}"], "path": ["api","auth","me"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "📦 Products",
+      "item": [
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/products",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api","products"]
+            }
+          }
+        },
+        {
+          "name": "Get Products (with filters)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/products?category=Tech&sort=price-asc&maxPrice=2000000",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api","products"],
+              "query": [
+                {"key": "category", "value": "Tech"},
+                {"key": "sort", "value": "price-asc"},
+                {"key": "maxPrice", "value": "2000000"},
+                {"key": "search", "value": "", "disabled": true},
+                {"key": "minRating", "value": "4.5", "disabled": true}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Single Product",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/products/p1", "host": ["{{BASE_URL}}"], "path": ["api","products","p1"]}
+          }
+        },
+        {
+          "name": "Create New Product (Admin)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/products", "host": ["{{BASE_URL}}"], "path": ["api","products"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"AuraWatch Pro - Smartwatch\",\n  \"category\": \"Tech\",\n  \"price\": 2199000,\n  \"stock\": 20,\n  \"description\": \"Smartwatch premium dengan layar AMOLED 1.4 inci, pemantau kesehatan lengkap, tahan air 50m.\",\n  \"image_url\": \"https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=800&auto=format&fit=crop&q=80\",\n  \"options\": { \"colors\": [\"Midnight Black\", \"Rose Gold\", \"Silver\"] },\n  \"specs\": { \"Layar\": \"1.4 inci AMOLED\", \"Baterai\": \"7 Hari\", \"Ketahanan Air\": \"50 Meter\" }\n}"
+            }
+          }
+        },
+        {
+          "name": "Update Product (Admin)",
+          "request": {
+            "method": "PUT",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/products/p1", "host": ["{{BASE_URL}}"], "path": ["api","products","p1"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"AuraSound Max - ANC Headphones (Updated)\",\n  \"price\": 3299000,\n  \"stock\": 20\n}"
+            }
+          }
+        },
+        {
+          "name": "Delete Product (Admin)",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/products/p1", "host": ["{{BASE_URL}}"], "path": ["api","products","p1"]}
+          }
+        },
+        {
+          "name": "Get Category Counts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/products/categories/counts", "host": ["{{BASE_URL}}"], "path": ["api","products","categories","counts"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "🛒 Checkout",
+      "item": [
+        {
+          "name": "Process Checkout (+ WA Notification)",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/checkout", "host": ["{{BASE_URL}}"], "path": ["api","checkout"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customerName\": \"Muhammad Saif\",\n  \"customerPhone\": \"081234567890\",\n  \"customerAddress\": \"Jl. Merdeka No. 45, Kecamatan Gambir\",\n  \"customerCity\": \"Jakarta Pusat\",\n  \"customerZip\": \"10110\",\n  \"paymentMethod\": \"ewallet\",\n  \"promoCode\": \"DISKON10\",\n  \"items\": [\n    {\n      \"productId\": \"p2\",\n      \"productName\": \"KeyCraft K2 - Mechanical Keyboard\",\n      \"productImage\": \"https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=800\",\n      \"productPrice\": 1899000,\n      \"quantity\": 1,\n      \"selectedColor\": \"Carbon Grey\",\n      \"selectedSwitch\": \"Brown (Tactile)\"\n    },\n    {\n      \"productId\": \"p7\",\n      \"productName\": \"AuraPod - True Wireless Earbuds\",\n      \"productImage\": \"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800\",\n      \"productPrice\": 899000,\n      \"quantity\": 1,\n      \"selectedColor\": \"Graphite Black\"\n    }\n  ],\n  \"subtotal\": 2798000,\n  \"discountAmount\": 279800,\n  \"total\": 2518200\n}"
+            }
+          }
+        },
+        {
+          "name": "Verify Promo Code",
+          "request": {
+            "method": "POST",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/checkout/verify-promo", "host": ["{{BASE_URL}}"], "path": ["api","checkout","verify-promo"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"ANTIGRAVITY\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get WA Notification Link",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/checkout/wa-link/ORD-12345", "host": ["{{BASE_URL}}"], "path": ["api","checkout","wa-link","ORD-12345"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "📋 Orders",
+      "item": [
+        {
+          "name": "Get All Orders (Admin)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/orders", "host": ["{{BASE_URL}}"], "path": ["api","orders"]}
+          }
+        },
+        {
+          "name": "Get Orders by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/api/orders?status=Diproses",
+              "host": ["{{BASE_URL}}"],
+              "path": ["api","orders"],
+              "query": [{"key": "status", "value": "Diproses"}]
+            }
+          }
+        },
+        {
+          "name": "Get Single Order Detail",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/orders/ORD-12345", "host": ["{{BASE_URL}}"], "path": ["api","orders","ORD-12345"]}
+          }
+        },
+        {
+          "name": "Update Order Status (Admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "url": {"raw": "{{BASE_URL}}/api/orders/ORD-12345/status", "host": ["{{BASE_URL}}"], "path": ["api","orders","ORD-12345","status"]},
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"Dikirim\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get Dashboard Stats",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/orders/stats/summary", "host": ["{{BASE_URL}}"], "path": ["api","orders","stats","summary"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏷️ Categories",
+      "item": [
+        {
+          "name": "Get All Categories",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/categories", "host": ["{{BASE_URL}}"], "path": ["api","categories"]}
+          }
+        },
+        {
+          "name": "Get Active Promo Codes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/api/categories/promo/codes", "host": ["{{BASE_URL}}"], "path": ["api","categories","promo","codes"]}
+          }
+        }
+      ]
+    },
+    {
+      "name": "🏥 Health",
+      "item": [
+        {
+          "name": "Root Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/", "host": ["{{BASE_URL}}"], "path": [""]}
+          }
+        },
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {"raw": "{{BASE_URL}}/health", "host": ["{{BASE_URL}}"], "path": ["health"]}
+          }
+        }
+      ]
+    }
+  ]
+}
