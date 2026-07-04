@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Root package.json for monorepo routing on Railway",
   "scripts": {
-    "build": "cd backend && npm install",
-    "start": "cd backend && node server.js"
+    "build": "cd backend && npm install && cd ../frontend && npm install",
+    "start": "if [ \"$SERVICE_TYPE\" = \"frontend\" ]; then cd frontend && node server.js; else cd backend && node server.js; fi"
   },
   "engines": {
     "node": ">=18"
