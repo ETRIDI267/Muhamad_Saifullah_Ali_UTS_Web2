@@ -5,8 +5,8 @@
 
 // --- API Configuration ---
 // Change this to your Railway deployment URL when deployed
-const API_BASE_URL = 'http://localhost:3000/api';
-// const API_BASE_URL = 'https://your-railway-app.up.railway.app/api'; // Uncomment when deployed
+const API_BASE_URL = 'https://backend-production-51ea5.up.railway.app/api';
+// const API_BASE_URL = 'http://localhost:3000/api'; // Local fallback option
 
 // --- App State ---
 let state = {
