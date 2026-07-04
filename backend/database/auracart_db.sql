@@ -207,9 +207,9 @@ INSERT IGNORE INTO product_reviews (product_id, author_name, rating, review_text
 -- ============================================================
 -- INDEXES
 -- ============================================================
-CREATE INDEX IF NOT EXISTS idx_products_category ON products(category);
-CREATE INDEX IF NOT EXISTS idx_products_is_active ON products(is_active);
-CREATE INDEX IF NOT EXISTS idx_orders_status ON orders(status);
-CREATE INDEX IF NOT EXISTS idx_orders_created_at ON orders(created_at);
+CREATE INDEX idx_products_category ON products(category);
+CREATE INDEX idx_products_is_active ON products(is_active);
+CREATE INDEX idx_orders_status ON orders(status);
+CREATE INDEX idx_orders_created_at ON orders(created_at);
 
 SELECT 'AuraCart Database initialized successfully!' AS status;
