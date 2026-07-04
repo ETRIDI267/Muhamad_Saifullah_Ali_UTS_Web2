@@ -1,0 +1,12 @@
+{
+  "name": "auracart-root",
+  "version": "1.0.0",
+  "description": "Root package.json for monorepo routing on Railway",
+  "scripts": {
+    "build": "cd backend && npm install",
+    "start": "cd backend && node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
